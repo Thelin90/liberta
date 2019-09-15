@@ -57,7 +57,7 @@ The code will run, please go to the `spark-ui` for more info, in the console it 
 
 There the process can be followed:
 
-![Screenshot](/docs/img/spark-ui-progress.png)
+![Screenshot](/img/spark-ui-progress.png)
 
 ## Setup Metabase
 
@@ -66,7 +66,7 @@ Surf into [metabase](http://localhost:3000)
 1) For the first part just enter som fake information to register
 2) Second part, connect to the postgres database
 
-![Screenshot](/docs/img/metabaselogin.png)
+![Screenshot](/img/metabaselogin.png)
 
 `user = metabase`
 `database = metabase`
