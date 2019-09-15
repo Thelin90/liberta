@@ -50,11 +50,27 @@ A [metabase](http://localhost:3000) server will be setup
 Go to the root of the project, then type:
 
 ```bash
-make 
+make tablestopg
 ```
 
+The code will run, please go to the `spark-ui` for more info, in the console it will log which ports it will be using.
+
+There the process can be followed:
+
+![Screenshot](/docs/img/spark-ui-progress.png)
 
 ## Setup Metabase
 
+Surf into [metabase](http://localhost:3000)
+
+1) For the first part just enter som fake information to register
+2) Second part, connect to the postgres database
+
+![Screenshot](/docs/img/metabaselogin.png)
+
+`user = metabase`
+`database = metabase`
+`password = password`
 
 ### Data Analysis
+
