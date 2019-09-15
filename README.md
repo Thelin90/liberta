@@ -1,4 +1,12 @@
+# Liberta
+
+This application reads data from S3 and creates a simple star schema from it.
+
+Application utilises `PySpark`, `docker-compose`, `metabase`, `postgresql`.
+
 ## Run application
+
+Follow steps below.
 
 Run manually by first initialise `virtualenv`  
 
@@ -35,4 +43,18 @@ docker-compose up
 ```
 
 A [minio](http://127.0.0.1:9000/minio/rawdata/) server with a default bucket and data has now been created, which can be used.
+A [metabase](http://localhost:3000) server will be setup
 
+## Run ETL
+
+Go to the root of the project, then type:
+
+```bash
+make 
+```
+
+
+## Setup Metabase
+
+
+### Data Analysis

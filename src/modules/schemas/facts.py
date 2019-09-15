@@ -1,4 +1,4 @@
-from pyspark.sql.types import StructField, StructType, StringType, IntegerType, LongType, DateType
+from pyspark.sql.types import StructField, StructType, IntegerType, LongType, TimestampType
 
 # surrogate key for fact_table https://www.kimballgroup.com/2006/07/design-tip-81-fact-table-surrogate-key/
 #
@@ -30,8 +30,8 @@ F_INIT_COL_NAMES = (
 
 F_SCHEMA = StructType(
     [
-        StructField("session_id", IntegerType(), False),
-        StructField("user_id", IntegerType(), False),
+        StructField("surr_session_id", IntegerType(), False),
+        StructField("surr_user_id", IntegerType(), False),
         StructField("AUD", LongType(), True),
         StructField("CZK", LongType(), True),
         StructField("CAD", LongType(), True),
@@ -44,7 +44,7 @@ F_SCHEMA = StructType(
         StructField("SEK", LongType(), True),
         StructField("USD", LongType(), True),
         StructField("ZAR", LongType(), True),
-        StructField("created_at", DateType(), False),
+        StructField("created_at", TimestampType(), False),
     ]
 )
 
