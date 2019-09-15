@@ -18,11 +18,4 @@ CREATE SCHEMA analysis;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA analysis TO metabase;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA analysis TO postgres;
 
-CREATE TABLE analysis.test_table (
-    address_id INTEGER
-);
-
-INSERT INTO analysis.test_table(address_id)
-VALUES (100)
-
 EOSQL
