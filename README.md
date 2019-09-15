@@ -6,7 +6,11 @@ This application reads data from S3 and creates a simple star schema from it.
 
 Application utilises `PySpark`, `docker-compose`, `metabase`, `postgresql`, `S3 (MinIO)`.
 
-## Star schema
+## Data set
+
+The dataset `rawevents` is automatically stored within a bucket, and can be accessed once docker has built it up.
+
+### Star schema
 
 Star schema after looking at the data
 
