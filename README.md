@@ -1,8 +1,10 @@
 # Liberta
 
+![Screenshot](/img/libertaoverview.png)
+
 This application reads data from S3 and creates a simple star schema from it.
 
-Application utilises `PySpark`, `docker-compose`, `metabase`, `postgresql`.
+Application utilises `PySpark`, `docker-compose`, `metabase`, `postgresql`, `S3 (MinIO)`.
 
 ## Run application
 
