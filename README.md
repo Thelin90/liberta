@@ -6,6 +6,37 @@ This application reads data from S3 and creates a simple star schema from it.
 
 Application utilises `PySpark`, `docker-compose`, `metabase`, `postgresql`, `S3 (MinIO)`.
 
+## Architecture
+
+Seen above the current solution is `batched` base. To make this entierly production ready, `Airflow` could be used
+to schedule the workflow. `Sensor` functionality in `Airflow` would be a great thing to trigger the spark job with, 
+probably running inside `EMR`. However, we do not need `HDFS` as a file system, `S3` will work just fine,
+we just need to remember they do not work in the same way, hence distributing the read process is defined by the code and 
+not native spark.
+
+Currently if the data grows with `10-15%` I see this being stable for short time, what would be needed to be updated
+first is probably doing an `upsert` instead of a `truncate-insert`. Utilising `HWM`(high water mark).
+Also `postgres` has its limitations and a `columnar` database would be preferable when the data grows more.
+
+### Streaming solution with Batch
+
+`Redshift` does not have the concept of constraints, it has a `main node`, `worker node` structure similar to `spark`.
+
+Potentially the `spark` job could be confined to the data transformation outside of core `ETL` jobs. Reading and writing to `S3`.
+
+And then utilising `Airflow` to move the data between `S3` and a `Redshift` database. This would scale properly.
+
+Where real time streaming of the core data could be done with [faust](https://faust.readthedocs.io/en/latest/) and `Kafka`.
+
+If there is a need to explore `tables` not within a given `datawarehouse`. Probably [delta lake](https://delta.io/) 
+would be a good product to implement which is based on `parquet` files with some more functionality.
+
+Example of a future system:
+
+![Screenshot](/img/propersystem.png)
+
+
+Currently a `star schema` is used 
 ## Data set
 
 The dataset `rawevents` is automatically stored within a bucket, and can be accessed once docker has built it up.

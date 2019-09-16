@@ -105,7 +105,6 @@ def add_incrementral_id(df: DataFrame, id_column: str, partitionby: str) -> Data
 def transform_fact_table(
     sc: SparkSession,
     df: DataFrame,
-    dimension_tables: Tuple[DataFrame, DataFrame],
     installed_at_col: str,
     created_at_col: str,
     fact_column_names: Tuple[str],
