@@ -80,9 +80,26 @@ Surf into [metabase](http://localhost:3000)
 
 ![Screenshot](/img/metabaselogin.png)
 
+`host = docker ip` 
 `user = metabase`
 `database = metabase`
 `password = password`
+
+Note that to get the correct host when connecting to the database, run:
+
+```bash
+docker ps -a
+```
+
+Then look at the container id of `postgres`, then run:
+
+```bash
+docker describe <container-id>
+```
+
+Look up: `IPAdress`
+
+Change `localhost` to the IP, and connect to database.
 
 ### Data Analysis
 
