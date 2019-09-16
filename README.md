@@ -199,3 +199,14 @@ group by created_at;
 `The query runs under a second, pretty fast for 420k + rows`
 
 ![Screenshot](/img/is_converting_is_paying2.png)
+
+#### Other insights
+
+`d_user`
+![Screenshot](/img/d_user.png)
+
+`d_session`
+![Screenshot](/img/d_session.png)
+
+`f_revenue`
+![Screenshot](/img/f_revenue.png)
