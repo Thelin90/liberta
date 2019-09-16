@@ -92,7 +92,6 @@ d_user: DataFrame = transform_dimension_table(
 f_revenue = transform_fact_table(
     sc=default_spark_session,
     df=raw_df,
-    dimension_tables=(d_user, d_session),
     installed_at_col=F_SPEC_COL_NAMES.get('install_ts'),
     created_at_col=F_SPEC_COL_NAMES.get('created_at'),
     fact_column_names=F_INIT_COL_NAMES,
