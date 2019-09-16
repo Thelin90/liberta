@@ -100,7 +100,7 @@ The code will run, please go to the `spark-ui` for more info, in the console it 
 
 There the process can be followed:
 
-![Screenshot](/img/spark-ui-progress.png)
+![Screenshot](/img/spark-ui-progress2.png)
 
 `It takes around 7 minutes for it to run on my machine, not the fastest, but local so what to expect`
 
@@ -198,4 +198,4 @@ group by created_at;
 
 `The query runs under a second, pretty fast for 420k + rows`
 
-![Screenshot](/img/is_converting_is_paying.png)
+![Screenshot](/img/is_converting_is_paying2.png)
