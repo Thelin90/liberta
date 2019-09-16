@@ -121,6 +121,10 @@ TODO:
 
 ### Data Analysis
 
+Some example on some data analysis of the tables.
+
+Feel free to play, slice and dice and explore the data with metabase functionality [custom/simple questions](https://www.metabase.com/docs/latest/users-guide/custom-questions.html).
+
 #### DAU
 
 What is an active user is?
@@ -136,3 +140,31 @@ WHERE created_at > '2017-01-01'
 GROUP BY 1
 ```
 ![Screenshot](/img/dau.png)
+
+#### Ratio is_converting / is_paying
+
+- The ratio has been decided to be the count of actual paying and at the same time converting players
+
+```sql
+WITH subquery as (
+    SELECT
+        surr_user_id as s_user_id,
+        is_converting,
+        is_paying
+    FROM metabase.analysis.d_user
+)
+SELECT
+    created_at,
+    COUNT(subquery.is_converting) as true_converting,
+    COUNT(subquery.is_paying) as true_paying
+FROM metabase.analysis.f_revenue, subquery
+WHERE created_at > '2017-01-01'
+AND surr_user_id = subquery.s_user_id
+AND LOWER(subquery.is_converting) = 'true'
+AND LOWER(subquery.is_paying) = 'true'
+group by created_at;
+```
+
+`The query runs under a second, pretty fast for 420k + rows`
+
+![Screenshot](/img/is_converting_is_paying.png)
