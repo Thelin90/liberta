@@ -71,12 +71,15 @@ There the process can be followed:
 
 ![Screenshot](/img/spark-ui-progress.png)
 
+`It takes around 7 minutes for it to run on my machine, not the fastest, but local so what to expect`
+
 ## Setup Metabase
 
 Surf into [metabase](http://localhost:3000)
 
 1) For the first part just enter som fake information to register
 2) Second part, connect to the postgres database
+3) Login!
 
 `1`
 ![Screenshot](/img/signup.png)
@@ -89,7 +92,7 @@ See in the `env` file.
 `database = metabase`
 `password = password`
 
-`2`
+`3`
 ![Screenshot](/img/getinmetabase.png)
 
 Note that to get the correct host when connecting to the database, run:
@@ -123,3 +126,13 @@ TODO:
 What is an active user is?
 
 - An active user by the first time the application got installed
+
+Enter metabase, choose [ask a question](https://metabase.com/docs/v0.12.0/users-guide/03-asking-questions.html) to your upper right.
+
+```sql
+SELECT created_at::DATE AS "date", count(distinct surr_user_id) AS dau          	
+FROM analysis.f_revenue
+WHERE created_at > '2017-01-01'
+GROUP BY 1
+```
+![Screenshot](/img/dau.png)
