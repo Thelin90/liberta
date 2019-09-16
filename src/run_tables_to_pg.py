@@ -99,6 +99,13 @@ f_revenue = transform_fact_table(
     schema=F_SCHEMA,
 )
 
+# - 464,244
+print(f_revenue.rdd.count())
+# -
+print(d_user.rdd.count())
+# -
+print(d_session.rdd.count())
+
 load_table_to_postgres(
     df=f_revenue,
     user=user,

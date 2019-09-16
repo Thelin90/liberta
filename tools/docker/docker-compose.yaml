@@ -38,19 +38,25 @@ services:
                         - 'MINIO_ACCESS_KEY=libertapoweruser'
                         - 'MINIO_SECRET_KEY=libertapoweruserpassword'
                 command: server /export
-        # buckets
-        createrawdatabucket:
+        # create a bucket to run locally
+        createbuckets:
                 image: minio/mc
-                entrypoint: >
-                        /bin/sh -c "
-                        /usr/bin/mc config host add myminio http://minio:9000 libertapoweruser libertapoweruserpassword;
-                        /usr/bin/mc mb myminio/rawevents;
-                        /usr/bin/mc mb myminio/dimensions;
-                        /usr/bin/mc mb myminio/facts;
-                        exit 0;"
-                network_mode: 'host'
-                depends_on:
+                links:
                         - minio
-
+                restart: on-failure
+                entrypoint: >
+                      /bin/sh -c "
+                        echo Waiting for minio service to start...;
+                        while ! nc -z minio 9000;
+                        do
+                          sleep 1;
+                        done;
+                        echo Connected!;
+                        mc config host add myminio http://minio:9000 libertapoweruser libertapoweruserpassword;
+                        /usr/bin/mc mb myminio/rawevents;
+                        /usr/bin/mc policy download myminio/rawevents;
+                        /usr/bin/mc policy upload myminio/rawevents;
+                        exit 0;
+                      "
 networks:
   liberta-app-default:
