@@ -78,12 +78,19 @@ Surf into [metabase](http://localhost:3000)
 1) For the first part just enter som fake information to register
 2) Second part, connect to the postgres database
 
-![Screenshot](/img/metabaselogin.png)
+`1`
+![Screenshot](/img/signup.png)
 
+`2`
+![Screenshot](/img/enterstuff.png)
+See in the `env` file.
 `host = docker ip` 
 `user = metabase`
 `database = metabase`
 `password = password`
+
+`2`
+![Screenshot](/img/getinmetabase.png)
 
 Note that to get the correct host when connecting to the database, run:
 
@@ -94,12 +101,25 @@ docker ps -a
 Then look at the container id of `postgres`, then run:
 
 ```bash
-docker describe <container-id>
+docker inspect <container-id>
 ```
+
+`"IPAddress": "172.28.0.2"`
 
 Look up: `IPAdress`
 
 Change `localhost` to the IP, and connect to database.
 
+## Tests
+
+TODO:
+
+:(
+
 ### Data Analysis
 
+#### DAU
+
+What is an active user is?
+
+- An active user by the first time the application got installed

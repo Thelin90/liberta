@@ -75,12 +75,7 @@ def extract_raw_data(
         partitionby='session_id',
     )
 
-    # rename id columns, will create surrogate keys instead for better performance with fact table
-    #raw_df = raw_df.withColumnRenamed('user_id', 'user')
-    #raw_df = raw_df.withColumnRenamed('session_id', 'session')
-
-    # print schema of raw extracted data
-    #raw_df.printSchema()
+    raw_df.printSchema()
 
     return raw_df
 
@@ -97,7 +92,6 @@ def add_incrementral_id(df: DataFrame, id_column: str, partitionby: str) -> Data
     """
     return df.withColumn(
         id_column,
-        #F.monotonically_increasing_id(),
         F.row_number().over(
             Window
             .partitionBy(partitionby)
@@ -142,18 +136,10 @@ def transform_fact_table(
     # Hence, a user can have many different sessions, but the revenue should still be the same
     # this could lead to duplicate rows of the revenue but the session_id (FK) would still be
     # unique, fair I say.
-
-    #fact_df: DataFrame = df.select(*fact_column_names).dropDuplicates()
-
-    #fact_df = fact_df.join(
-    ##    dimension_tables[0],
-    #    fact_df['user_id'] == dimension_tables[0]['user_id']
-    #).select(fact_df["*"], dimension_tables[0]["surr_user_id"])
-
-    #fact_df = fact_df.join(
-    #    dimension_tables[1],
-    #    fact_df['session_id'] == dimension_tables[1]['session_id']
-    #).select(fact_df["*"], dimension_tables[1]["surr_session_id"])
+    #
+    # Currently when I add the surrogate keys I get duplicated columns, but unique rows in my
+    # fact table, I guess it is a subjective matter, but it will give me more effiecient joins
+    # so I guess it is a trade off.
 
     # time of first installation of app, can be useful in the fact table, since every row is unique
     # I am thinking to use this for DAU
@@ -236,6 +222,8 @@ def load_table_to_postgres(
         table: str,
 ) -> None:
 
+    # I have not tried to much, but this increased the
+    # writing time massively
     df.repartition(100).write.mode("overwrite") \
         .format('jdbc') \
         .option('url', f'jdbc:postgresql:{postgres_db_name}') \
