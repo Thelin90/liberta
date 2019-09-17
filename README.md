@@ -77,6 +77,8 @@ brew install lzop
 
 `subprocess` will otherwise fail when running application locally (decompression when reading S3 files).
 
+Rename `env.example` to `env` under `src/`.
+
 #### Local run
 
 `cd tools/docker`
