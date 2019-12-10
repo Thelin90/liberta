@@ -71,6 +71,22 @@ Run:
 
 Explicitly for MacOS users
 
+Java 8
+
+```bash
+brew tap adoptopenjdk/openjdk
+brew cask install adoptopenjdk8
+```
+```bash
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre/bin
+export PATH=$JAVA_HOME/bin:$PATH
+```
+
+Source the exports
+```bash
+source ~/<.zshrc, .bashrc, etc>
+```
+LZOP
 ```bash
 brew install lzop
 ```
@@ -78,6 +94,14 @@ brew install lzop
 `subprocess` will otherwise fail when running application locally (decompression when reading S3 files).
 
 Rename `env.example` to `env` under `src/`.
+
+If Python crashes for no reason
+`objc[4182]: +[__NSPlaceholderDictionary initialize] may have been in progress in another thread when fork() was called`
+
+Simply add
+```bash
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+```
 
 #### Local run
 
